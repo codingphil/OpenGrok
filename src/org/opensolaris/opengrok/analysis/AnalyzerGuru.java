@@ -30,6 +30,7 @@ import java.io.StringReader;
 import java.io.Writer;
 import java.util.*;
 import java.util.logging.Level;
+
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -63,6 +64,7 @@ import org.opensolaris.opengrok.analysis.plain.XMLAnalyzerFactory;
 import org.opensolaris.opengrok.analysis.python.PythonAnalyzerFactory;
 import org.opensolaris.opengrok.analysis.scala.ScalaAnalyzerFactory;
 import org.opensolaris.opengrok.analysis.sh.ShAnalyzerFactory;
+import org.opensolaris.opengrok.analysis.spbdl.SpBdlAnalyzerFactory;
 import org.opensolaris.opengrok.analysis.sql.PLSQLAnalyzerFactory;
 import org.opensolaris.opengrok.analysis.sql.SQLAnalyzerFactory;
 import org.opensolaris.opengrok.analysis.tcl.TclAnalyzerFactory;
@@ -157,7 +159,8 @@ public class AnalyzerGuru {
             new ScalaAnalyzerFactory(),
             new SQLAnalyzerFactory(),
             new PLSQLAnalyzerFactory(),
-            new FortranAnalyzerFactory()
+            new FortranAnalyzerFactory(),
+            new SpBdlAnalyzerFactory()
         };
 
         for (FileAnalyzerFactory analyzer : analyzers) {

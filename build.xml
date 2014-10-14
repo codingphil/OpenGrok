@@ -210,6 +210,8 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
         <jflex file="${src.dir}/org/opensolaris/opengrok/analysis/csharp/CSharpXref.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
         <jflex file="${src.dir}/org/opensolaris/opengrok/analysis/uue/UuencodeXref.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
         <jflex file="${src.dir}/org/opensolaris/opengrok/analysis/uue/UuencodeFullTokenizer.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
+        <jflex file="${src.dir}/org/opensolaris/opengrok/analysis/spbdl/SpBdlSymbolTokenizer.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
+        <jflex file="${src.dir}/org/opensolaris/opengrok/analysis/spbdl/SpBdlXref.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
         <jflex file="${src.dir}/org/opensolaris/opengrok/search/context/HistoryLineTokenizer.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
         <jflex file="${src.dir}/org/opensolaris/opengrok/search/context/PlainLineTokenizer.lex" destdir="${src.generatedsrc.dir}" inputstreamctor="false"/>
     </target>
