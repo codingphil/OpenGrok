@@ -14,7 +14,7 @@ import org.opensolaris.opengrok.web.Util;
 %public
 %class SpBdlXref
 %extends JFlexXref
-%unicode
+%8bit
 %ignorecase
 %int
 %{
