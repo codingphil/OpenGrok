@@ -1,0 +1,53 @@
+//-------------------------------------------------------------------
+// Web Benchmark Script Template
+//-------------------------------------------------------------------
+// Author : 
+// Date   : 
+// History: 
+//-------------------------------------------------------------------
+// Benchmark Description
+//-------------------------------------------------------------------
+
+benchmark WebBenchmarkName
+
+use "WebAPI.bdh" 
+
+// Definition of global variables
+var      
+  gnCount : number;
+  
+// Random Variables Section 
+dclrand
+  rnUniN            : RndUniN  (1..100);  
+  rsName            : RndInd   ("Jim" = 0.4; "Tony" = 0.6);
+  
+// Workload Section 
+dcluser  
+  user
+    WebUser
+  transactions
+    TInit       : begin;
+    TWeb        : 1;
+
+// Web Transactions Section
+dcltrans
+
+  transaction TInit
+  begin
+    // WebUser specific settings may come here
+    // WebSetSpeed(WEB_SPEED_28);
+  end TInit;
+
+  transaction TWeb
+  BEGIN
+    // insert here the statements of the transaction
+  END TWeb;
+
+// Web Forms Section
+dclform
+  SAMPLE_FORM:
+    "LeftParam" := "RightParam",
+    "Name"      := rsName;
+
+  
+  
