@@ -35,7 +35,7 @@ Identifier = [a-zA-Z_] [a-zA-Z0-9_]+
 
 URIChar = [\?\+\%\&\:\/\.\@\_\;\=\$\,\-\!\~\*\\]
 FNameChar = [a-zA-Z0-9_\-\.]
-File = [a-zA-Z]{FNameChar}* "." ("bdl"|"bdh")
+File = [a-zA-Z]{FNameChar}* "." ("bdf"|"bdh")
 Path = "/"? [a-zA-Z]{FNameChar}* ("/" [a-zA-Z]{FNameChar}*[a-zA-Z0-9])+
 
 Number = (0[xX][0-9a-fA-F]+|[0-9]+\.[0-9]+|[0-9]+)(([eE][+-]?[0-9]+)?[ufdlUFDL]*)?
