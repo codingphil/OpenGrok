@@ -14,7 +14,7 @@ import org.opensolaris.opengrok.history.Annotation;
 
 public class SpBdlAnalyzerFactory extends FileAnalyzerFactory {
     private static final String[] SUFFIXES = {
-        "BDL", "BDH"
+        "BDF", "BDH"
     };
 
     public SpBdlAnalyzerFactory() {
