@@ -39,9 +39,9 @@ dcltrans
   end TInit;
 
   transaction TWeb
-  BEGIN
+  begin
     // insert here the statements of the transaction
-  END TWeb;
+  end TWeb;
 
 // Web Forms Section
 dclform
