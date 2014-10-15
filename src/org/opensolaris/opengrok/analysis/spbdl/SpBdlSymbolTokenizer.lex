@@ -25,7 +25,7 @@ Identifier = [a-zA-Z_] [a-zA-Z0-9_]*
 
 <YYINITIAL> {
 {Identifier} {String id = yytext();
-                if(!Consts.kwd.contains(id)){
+                if(!Consts.kwd.contains(id.toLowerCase())){
                         setAttribs(id, yychar, yychar + yylength());
                         return true; }
               }
