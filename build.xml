@@ -149,7 +149,6 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
     <path id="pmd.lib.search.path">
         <pathelement path="${pmd.home}/lib/"/>
         <pathelement path="${java.class.path}"/>
-        <pathelement path="lib/pmd/lib/"/>
     </path>
 
     <target name="-check-jflex" description="Check that jflex jar file is present">
@@ -282,14 +281,7 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
         <delete dir="${coverage.dir}"/>
         <antcall target="-delete-generated-repository-files"/>
     </target>
-    
-    <target name="clean-lib" depends="init">
-        <delete file="${file.reference.lucene-core.jar}"/>
-        <delete file="${file.reference.lucene-analyzers-common.jar}"/>
-        <delete file="${file.reference.lucene-queryparser.jar}"/>
-        <delete file="${file.reference.lucene-suggest.jar}"/>
-    </target>
-
+        
     <!--
         Create an empty manifest file so that nbproject/build-impl.xml
         notices that a manifest should be added to the jar file
@@ -373,6 +365,11 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
     </target>
     
     <target name="download-lucene" depends="-check-lucene" if="lucene_not_downloaded">
+        <delete>
+         <fileset dir="lib">
+          <include name="lucene-*.jar"/>          
+         </fileset>
+        </delete>
         <get src="${mvn.repository}/org/apache/lucene/lucene-core/${lucene.version}/${lucene-core.jar}"
         dest="lib/${lucene-core.jar}" verbose="true" usetimestamp="true"/>
         <get src="${mvn.repository}/org/apache/lucene/lucene-analyzers-common/${lucene.version}/${lucene-analyzers-common.jar}"
@@ -521,19 +518,20 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
         </checkstyle>
     </target>
 
-    <target name="-check_pmd" description="Check that pmd jar files are present">
-        <available file="pmd.jar" type="file" property="pmd.jar.present">
+    <target name="-check_pmd" description="Check that pmd jar files are present">        
+        <available file="${pmd.home}/lib" type="dir" property="pmd-lib.present">
             <filepath refid="pmd.lib.search.path"/>
         </available>
-        <fail unless="pmd.jar.present" message="Please install pmd.jar in lib-directory  (or in ant classpath) to run PMD, see README."/>
+        <fail unless="pmd-lib.present" message="Please point pmd.home to proper directory to run PMD, see README."/>        
     </target>
-    
+
+    <path id="pmd.lib" >
+	<fileset followsymlinks="false" dir="${pmd.home}/lib">
+		<include name="*.jar"/>
+	</fileset>        
+    </path>
+
     <target name="pmd" depends="compile, -check_pmd" description="Run PMD on OpenGrok source code">
-        <path id="pmd.lib" >
-            <pathelement location="${pmd.home}/lib/pmd.jar"/>
-            <pathelement location="${pmd.home}/lib/jaxen.jar"/>
-            <pathelement location="${pmd.home}/lib/asm.jar"/>
-        </path>
         <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathref="pmd.lib"/>
         <mkdir dir="pmd"/>
         <pmd failuresPropertyName="pmd.num.warnings" rulesetfiles="tools/pmd_ruleset.xml">
@@ -549,10 +547,6 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
     </target>
 
     <target name="cpd-xml" depends="compile, -check_pmd" description="Run CPD on OpenGrok source code, print output in xml">
-        <path id="pmd.lib" >
-            <pathelement location="${pmd.home}/lib/pmd.jar"/>
-            <pathelement location="${pmd.home}/lib/jaxen.jar"/>
-        </path>
         <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="pmd.lib"/>
         <cpd minimumTokenCount="100" format="xml" outputFile="pmd/cpd_report.xml">
             <fileset dir="src">
@@ -565,10 +559,6 @@ Copyright (c) 2005, 2011, Oracle and/or its affiliates. All rights reserved.
     </target>
 
     <target name="cpd" depends="compile, -check_pmd" description="Run CPD on OpenGrok source code">
-        <path id="pmd.lib" >
-            <pathelement location="${pmd.home}/lib/pmd.jar"/>
-            <pathelement location="${pmd.home}/lib/jaxen.jar"/>
-        </path>
         <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="pmd.lib"/>
         <cpd minimumTokenCount="100" outputFile="pmd/cpd_report.txt">
             <fileset dir="src">

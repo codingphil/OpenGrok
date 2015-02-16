@@ -790,21 +790,14 @@ from http://pmd.sourceforge.net/.
 How to install:
 
   $ cd ~/.ant/lib
-  $ unzip ~/Desktop/pmd-bin-5.0.0.zip
-  $ ln -s pmd-5.0.0/ pmd
+  $ unzip ~/Desktop/pmd-bin-5.2.3.zip
+  $ ln -s pmd-5.2.3/ pmd
 
-You also have to make links to the jar files:
+To run PMD on the source code, just run ant pmd:
 
-  $ cd ~/.ant/lib/pmd/lib
-  $ ln -s pmd-5.0.0.jar pmd.jar
-  $ ln -s jaxen-1.1.1.jar jaxen.jar
-  $ ln -s asm-3.2.jar asm.jar
+  $ ant -Dpmd.home=~/.ant/lib/pmd pmd
 
-To run PMD on the rource code, just run ant pmd:
-
-  $ ant pmd
-
-Outout from the command will be stored in the pmd subdirectory:
+Output from the command will be stored in the pmd subdirectory:
 
   $ ls pmd
   pmd_report.html  pmd_report.xml
@@ -812,13 +805,13 @@ Outout from the command will be stored in the pmd subdirectory:
 If you want to install PMD some other place than ~/.ant/lib, you can
 unzip the .zip file to a directory, and use the pmd.home property
 to tell ant where to find PMD, like this (if you have installed 
-PMD under the lib directory):
+PMD under the ./ext_lib directory):
 
-  $ ant pmd -Dpmd.home=lib/pmd-5.0.0
+  $ ant pmd -Dpmd.home=ext_lib/pmd
 
 To run CPD, just use the same as above, but use targets:
 
-  $ ant cpd cpd-xml
+  $ ant -Dpmd.home=ext_lib/pmd cpd cpd-xml
 
 Which will result in:
 
@@ -925,6 +918,11 @@ the project list when requesting search results):
   redirectPort="8443" />
 
 Refer to docs of other containers for more info on how to achieve the same.
+
+The same tuning to Apache can be done with the LimitRequestLine directive:
+
+  LimitRequestLine 65536
+  LimitRequestFieldSize 65536
 
 
 11. Authors
